@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- dao를 갖기 때문에 dao를 먼저설정하기 -->
+	<bean id="CustomerDAO" class="com.sist.dao.CustomerDAO"/>
+	
+	<!--  Controller는 id가 없어도 됨-->
+	<bean  class="com.sist.controller.ListCustomerController">
+		<property name="dao" ref="CustomerDAO"></property>
+	</bean>
+	
+	
+	<bean class="com.sist.controller.InsetCustomerController">
+		<property name="dao" ref="CustomerDAO"></property>	
+	</bean>
+	
+	
+	<bean class="com.sist.controller.updateCustomerController">
+		<property name="dao" ref="CustomerDAO"></property>
+	</bean>
+	
+	<!--view의 자세한 설정 -->
+	<!-- viewResolver : spring이 제공하는 -->
+	<bean id="viewResolver" 
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 찾을 위치 -->
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<!-- 확장자 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+</beans>
